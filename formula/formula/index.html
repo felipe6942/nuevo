@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de registro</title>
+    <link rel="stylesheet" href="/formula/index.css">
+    
+</head>
+<body>
+
+    <form id="registroForm" action="" method="GET">
+        <h1>Registro para vacunación COVID-19</h1>
+
+        <!-- Campo de nombre -->
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <div class="error" id="nombreError">El nombre es obligatorio</div>
+
+        <!-- Campo de usuario -->
+        <label for="usuario">Usuario:</label>
+        <input type="text" id="usuario" name="usuario" required>
+        <div class="error" id="usuarioError">El usuario es obligatorio</div>
+
+        <!-- Campo de sexo (radio buttons) -->
+        <label>Sexo:</label>
+        <input type="radio" id="hombre" name="sexo" value="hombre" required>
+        <label for="hombre">Hombre</label>
+        <input type="radio" id="mujer" name="sexo" value="mujer" required>
+        <label for="mujer">Mujer</label>
+        <div class="error" id="sexoError">El sexo es obligatorio</div>
+
+
+        <label>telefono:</label>
+        <input type="number" id="numero" name="telefono"  required>
+        <div class="error" id="numeroError">El numero de telefono es obligatorio</div>
+
+        <label for="fecha">fecha de nacimiento</label>
+        <input type="date" id="fecha" name="nacimiento"  required>
+        <div class="error" id="fechaError">la fecha de nacimiento  es obligatorio</div>
+
+
+        <!-- Campo de correo electrónico -->
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required>
+        <div class="error" id="emailError">El correo electrónico es obligatorio</div>
+
+        <!-- Campo de contraseña -->
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+        <div class="error" id="passwordError">La contraseña es obligatoria</div>
+
+        <!-- Casilla de verificación de términos y condiciones -->
+        <input type="checkbox" id="terminos" name="terminos" required>
+        <label for="terminos">Declaro haber leído y aceptar las condiciones generales del programa y la normativa sobre protección de datos</label>
+        <div class="error" id="terminosError">Debes aceptar los términos y condiciones</div>
+
+        <!-- Botón de envío -->
+        <button type="submit">Registrarse</button>
+        <div class="success" id="successMessage" style="display:none;">Formulario enviado correctamente.</div>
+    </form>
+
+    <script>
+        // Validación del formulario
+        document.getElementById('registroForm').addEventListener('submit', function(event) {
+            let isValid = true;
+
+            // Validar el campo nombre
+            const nombre = document.getElementById('nombre').value.trim();
+            if (nombre === "") {
+                document.getElementById('nombreError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('nombreError').style.display = 'none';
+            }
+
+            // Validar el campo usuario
+            const usuario = document.getElementById('usuario').value.trim();
+            if (usuario === "") {
+                document.getElementById('usuarioError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('usuarioError').style.display = 'none';
+            }
+
+            // Validar el campo sexo
+            const sexoHombre = document.getElementById('hombre').checked;
+            const sexoMujer = document.getElementById('mujer').checked;
+            if (!sexoHombre && !sexoMujer) {
+                document.getElementById('sexoError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('sexoError').style.display = 'none';
+            }
+
+            // Validar el campo email
+            const email = document.getElementById('email').value.trim();
+            if (email === "") {
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('emailError').style.display = 'none';
+            }
+
+            // Validar el campo contraseña
+            const password = document.getElementById('password').value.trim();
+            if (password === "") {
+                document.getElementById('passwordError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('passwordError').style.display = 'none';
+            }
+
+            // Validar los términos y condiciones
+            const terminos = document.getElementById('terminos').checked;
+            if (!terminos) {
+                document.getElementById('terminosError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('terminosError').style.display = 'none';
+            }
+
+            // Si el formulario no es válido, evitar el envío
+            if (!isValid) {
+                event.preventDefault();
+            } else {
+                document.getElementById('successMessage').style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>
